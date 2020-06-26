@@ -3,3 +3,6 @@ Padrao de camadas -> Dividir um projeto em camadas, onde cada camada tem uma res
 Camada de aplicação -
 Camada jogo de Xadrez -
 Camada Tabuleiro
+
+T -> Torre
+R -> Rei
