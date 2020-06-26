@@ -1,0 +1,5 @@
+Padrao de camadas -> Dividir um projeto em camadas, onde cada camada tem uma responsabilidade específica
+
+Camada de aplicação -
+Camada jogo de Xadrez -
+Camada Tabuleiro
