@@ -6,32 +6,34 @@ namespace JogoDeXadrez {
     class Tela {
         public static void imprimirTabuleiro(Tabuleiro tab) {
             for (int i=0;i<tab.linhas; i++){
-                Console.Write(8-i+" ");
+                Console.Write(8-i + " ");
                 for(int j=0; j < tab.colunas; j++) {
-                    if (tab.peca(i, j) == null) {
-                        Console.Write("- ");
-                    }
-                    else {
-                        imprimirPeca(tab.peca(i, j));
-                        Console.Write(" ");
-                    }
-                    
+                    imprimirPeca(tab.peca(i, j));                                       
                 }
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
         }
-        public static void imprimirPeca(Peca peca) {
-            if(peca.cor == Cor.Branca) {
-                Console.Write(peca);
+        public static void imprimirTabuleiro(Tabuleiro tab,bool[,] posicoesPossiveis) {
+            ConsoleColor fundoOriginal = Console.BackgroundColor; //Pega a cor de fundo, no caso aqui PRETO
+            ConsoleColor fundoAlterado = ConsoleColor.DarkGray; //Cinza escuro
+            
+            for (int i = 0; i < tab.linhas; i++) {
+                Console.Write(8 - i + " ");
+                for (int j = 0; j < tab.colunas; j++) {
+                    if (posicoesPossiveis[i, j]) { // Se a posicao estiver marcada como uma posicao possivel de movimento
+                        Console.BackgroundColor = fundoAlterado; //Muda o fundo para cinza escuro
+                    }
+                    else {
+                        Console.BackgroundColor = fundoOriginal;
+                    }
+                    imprimirPeca(tab.peca(i, j));
+                    Console.BackgroundColor = fundoOriginal;
+                }
+                Console.WriteLine();
             }
-            else {
-                ConsoleColor aux = Console.ForegroundColor; //Cor atual do console, Cinza
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(peca);
-                Console.ForegroundColor = aux;
-
-            }
+            Console.WriteLine("  a b c d e f g h");
+            Console.BackgroundColor = fundoOriginal;
         }
         public static PosicaoXadres lerPosicaoXadrez() {
             // Le do teclado uma posicao do xadres
@@ -40,5 +42,23 @@ namespace JogoDeXadrez {
             int linha = int.Parse(s[1] + "");
             return new PosicaoXadres(coluna, linha);
         }
+        public static void imprimirPeca(Peca peca) {
+            if (peca == null) {
+                Console.Write("- ");
+            }
+            else {
+                if (peca.cor == Cor.Branca) {
+                    Console.Write(peca);
+                }
+                else {
+                    ConsoleColor aux = Console.ForegroundColor; //Cor atual do console, Cinza
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(peca);
+                    Console.ForegroundColor = aux;
+                }
+                Console.Write(" ");
+            }
+        }
+       
     }
 }
