@@ -31,6 +31,8 @@ namespace JogoDeXadrez {
                     }
                 
                 }
+                Console.Clear();
+                Tela.imprimirPartida(partida);
 
 
             }
